@@ -65,27 +65,23 @@
 \begin{document}
 \maketitle
 
-\begin{enumerate}
+\section{Perform a precise analysis of the time complexity of the Flooding algorithm.}
+\subsection{The synchronous model}
 
-\item{\textit{Perform a precise analysis of the time complexity of the Flooding algorithm for:}}
+In the synchronous model, process execution speeds and message delivery delays are upper-bounded by a fixed $k$.
 
-\begin{enumerate}
+Every processor receives $M$ after at most $D$ time and at most $|E|$ messages, where $D$ is the diameter of the network, and $E$ is the set of (directed) edges in the network. Proof is by induction.
 
-     \item{the synchronous mode and}
-     \item{the asynchronous model.}
+Let $d(root, v) = k > 0$. Then $v$ has a neighbour $u$ such that $d(root, u) = k - 1$. By the induction hypothesis, $u$ receives $M$ for the first time no later than time $k - 1$. $u$ sends $M$ to all its neighbours, including $v$ at $k$, so $M$ arrives at $v$ no later than time $(k - 1) + 1 = k$.
 
-\end{enumerate}
+Each process only sends $M$ to its neighbours once, so each edge carries at most one copy of $M$. The message complexity is therefore $|E$.
 
-\item{\textit{Consider an anonymous ring where processors start with binary inputs.}}
+\subsection{The asynchronous model}
 
-\begin{enumerate}
+\section{Consider an anonymous ring where processors start with binary inputs.}
 
-     \item{Give an argument that there is no uniform synchronous algorithm for computing the AND of the input bits.}
-     \item{Present an asynchronous (non-uniform) algorithm for computing the AND. The algorithm should send $O(n^2)$ messages in the worst-case.}
-	\item{Present a synchronous algorithm for computing the AND. The algorithm should send $O(n)$ messages in the worst case.}
-
-\end{enumerate}
-
-\end{enumerate}
+\subsection{Give an argument that there is no uniform synchronous algorithm for computing the AND of the input bits.}
+\subsection{Present an asynchronous (non-uniform) algorithm for computing the AND. The algorithm should send $O(n^2)$ messages in the worst-case.}
+\subsection{Present a synchronous algorithm for computing the AND. The algorithm should send $O(n)$ messages in the worst case.}
 
 \end{document}
