@@ -66,22 +66,25 @@
 \maketitle
 
 \section{Perform a precise analysis of the time complexity of the Flooding algorithm.}
+
+Let $G = (V_G, E_G)$ be a connected topology graph with specified root $p_r$.  $p_r$ has message $\langle M \rangle$ at $t = 0$.  Let a \textit{neighbour} of a vertex $v$ be a vertex $u$ such that $(u, v) \in E_G$. 
+Let $dist(p_i, p_j)$ denote the distance between $p_i, p_j \in G$. Let $D = max\{dist(p_i, p_j) \ | \ (p_i, p_j) \in V_G \}$ be the diameter of $G$. 
+
 \subsection{The synchronous model}
 
-Let $A$ be the sychronous Flooding algorithm.
-Let $p_r$ be the root node in a tree $G = (V, E)$. $p_r$ has message $m$ at $t = 0$. Analysis is by induction.\\
+Let $A$ be the synchronous Flooding algorithm. Analysis is by induction.\\
 
 \noindent
-\textit{Base case}: each child of $p_r$ receives $m$ in the first round, $t = 1$.\\
-\textit{Step case}: a child processor $p$ of a parent processor $p'$ receives $m$ at $t$ if $p'$ received $m$ at $t - 1$. True by description of $A$. \\
+\textit{Base case}: each neighbour of $p_r$ receives $\langle M \rangle$ in the first round, $t = 1$.\\
+\textit{Step case}: a neighbour $u$ of a node $v$ receives $\langle M \rangle$ at $t$ if $v$ received $\langle M \rangle$ at $t - 1$. True by description of $A$. \\
 
-Each processor at distance $t$ from $p_r$ therefore receives $m$ in round $t$. $A$ terminates when every processor has the message $m$. The last processor will receive $m$ at $t = D$, where $D$ is the \textit{diameter} of $G$. This is also the depth of $G$. As $D < |V|$, the time complexity of $A$ is $O(n)$.
+Each node at distance $t$ from $p_r$ therefore receives $\langle M \rangle$ in round $t$. $A$ terminates when every node has $\langle M \rangle$. The last node, at distance $D$ from $p_r$ will receive $\langle M \rangle$ at $t = D$. The time complexity of $A$ is therefore $O(D)$.
 
 \subsection{The asynchronous model}
 
-In asychronous systems the flooding algorithm terminates after $R$ time units, where $R$ is the radius is the source. However, the constructed spanning tree may not be a breadth-first search spanning tree. 
+Let $B$ be the asynchronous Flooding algorithm. In the asynchronous model, time is expressed in terms of \textit{maximum message delays}, where a message delay is the time elapsed between the computation event that sends  $\langle M \rangle$ and the computation event that processes $\langle M \rangle$. This is set to $1$ for convenience. 
 
-In every execution of the broadcast algorithm in the asynchronous model, every process at distance $t$ from $p_r$ in the spanning tree receives $M$ in 
+Therefore each message effectively \textit{is} transmitted in a round, as in the synchronous model, where each round lasts the maximum message delay, $1$. The time complexity of $B$ is therefore exactly the same as $A$ in $1.1$, by exactly the same proof: $O(D)$.
 
 \section{Consider an anonymous ring where processors start with binary inputs.}
 
